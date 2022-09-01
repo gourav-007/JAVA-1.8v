@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+class NotnullNonempty{
+    static ArrayList<String> al = new ArrayList<String>();
+    public static void main(String[] args) {
+        String[] names = {"Gourav", "", null, "Ravi", "", "Shan", null};
+        Predicate<String> notNullNotEmpty = s -> s != null && s.length() != 0;
+        m1(notNullNonEmpty,names);
+    }
+    private static void m1(Predicate<String> notNullNonEmpty,String[] names){
+        for (String name : names){
+            if (notNullNotEmpty.test(name)){
+                al.add(name);
+            }
+        }
+        System.out.println(al);
+    }
+}
+
+//output : [Gourav, Ravi, Shan]
