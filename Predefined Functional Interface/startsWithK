@@ -1,0 +1,19 @@
+import java.util.function.Predicate;
+
+class TestClass {
+//Name Starts with 'K' using predicate, lambda ex.
+    public static void main(String[] args) {
+        String[] name = {"Rabert", "Kai", "Mani", "Katay", "Kara"};
+        System.out.println("Names Start with K");
+        Predicate<String> p = s -> s.charAt(0) == 'K';
+        m1(p,name);
+    }
+
+    private static void m1(Predicate<String> p, String[] names) {
+        for (String name : names) {
+            if (p.test(name)) {
+                System.out.println(name);
+            }
+        }
+    }
+}
