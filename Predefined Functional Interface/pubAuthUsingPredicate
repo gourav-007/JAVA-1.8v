@@ -1,0 +1,36 @@
+import java.util.function.Predicate;
+
+class pubAuth{
+    public pubAuth(String name,int age, boolean haveGF) {
+        this.name=name;
+        this.age = age;
+        this.haveGF = haveGF;
+    }
+    String name;
+    int age;
+    boolean haveGF;
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+class RunnerClass{
+    public static void main(String[] args) {
+        Predicate<pubAuth> allowed = e-> e.age>=18 && e.haveGF;
+
+        pubAuth[] list = {
+                new pubAuth("Gourav",18,false),
+                new pubAuth("Ravi",20,true),
+                new pubAuth("Kishan",18,true),
+                new pubAuth("Akash",60,false)
+        };
+
+        System.out.println("Allowed people in pub are : ");
+        for (pubAuth l : list)
+            if (allowed.test(l)){
+                System.out.println(l);
+            }
+    }
+}
