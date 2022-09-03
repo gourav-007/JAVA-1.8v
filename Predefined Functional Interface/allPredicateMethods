@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+class Employee{
+    public Employee(String name, String designation, double salary, String city) {
+        this.name = name;
+        this.designation = designation;
+        this.salary = salary;
+        this.city = city;
+    }
+
+    String name;
+    String designation;
+    double salary;
+    String city;
+
+    @Override
+    public String toString(){
+        return String.format("\n(%s,%s,%.2f,%s)",name,designation,salary,city);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Employee e  = (Employee) obj;
+        return name.equals(e.name) && designation.equals(e.designation) && salary == e.salary && city.equals(e.city);
+    }
+}
+
+class MainClass{
+    public static void main(String[] args) {
+        Predicate<Employee> checkManager = e -> e.designation.equalsIgnoreCase("Manager");
+        Predicate<Employee> checkCity = e -> e.city.equalsIgnoreCase("Banglore");
+        Predicate<Employee> checkSalary = e -> e.salary<20000;
+        Predicate<Employee> isCEO = Predicate.isEqual(new Employee("Gourav","CEO",10000,"Delhi"));
+        ArrayList<Employee> al = new ArrayList<>();
+        fillArrayList(al);
+
+//        Display all Employee who are Managers
+        displayPredicate(checkManager,al);
+//        Display Employees who's city is Banglore
+        displayPredicate(checkCity,al);
+//        Display Employees who's salary is less than 20K
+        displayPredicate(checkSalary,al);
+//        Display Employees who are managers and lives in Banglore city.
+        displayPredicate(checkManager.and(checkCity),al);
+//        Display Employees who either Managers or have Salary less tha 20K
+        displayPredicate(checkManager.or(checkSalary),al);
+//        Display Employees who are !(Managers)
+        displayPredicate(checkManager.negate(),al);
+        //Check two similar predicate Object by using isEqual staic method
+        Employee e1 = new Employee("Gourav","CEO",10000,"Delhi");
+        Employee e2 = new Employee("Harry","Manager",5000,"Chennai");
+        System.out.println(isCEO.test(e1));
+    }
+
+    private static void displayPredicate(Predicate<Employee> checkManager, ArrayList<Employee> al) {
+        for (Employee list : al){
+            if (checkManager.test(list)){
+                System.out.println(list);
+            }
+        }
+    }
+
+    private static void fillArrayList(ArrayList<Employee> al) {
+        al.add(new Employee("Raj", "CEO", 30000, "Delhi"));
+        al.add(new Employee("Jazz", "Sr Manager", 20000, "London"));
+        al.add(new Employee("Strut", "HR", 10000, "New York"));
+        al.add(new Employee("Jack", "Manager", 10000, "Banglore"));
+        al.add(new Employee("Riyan", "QA", 6000, "Banglore"));
+        al.add(new Employee("Divesh", "Dev", 5000, "Hydrabad"));
+
+    }
+}
