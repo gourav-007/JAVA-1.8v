@@ -1,0 +1,10 @@
+import java.util.function.Consumer;
+
+//Consumer return type is VOID it can only consume but can't return anything.
+
+class TestClass{
+    public static void main(String[] args) {
+        Consumer<String> c = s -> System.out.println(s);
+        c.accept("Hello Consumer");
+    }
+}
