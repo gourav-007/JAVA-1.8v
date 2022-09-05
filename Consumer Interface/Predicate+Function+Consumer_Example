@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+class Student{
+    public Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    String name;
+    int marks;
+}
+
+class TestClass{
+    public static void main(String[] args) {
+        Function<Student,String> calcGrade = input -> {
+            if (input.marks>=80)
+                return "A";
+            else if (input.marks>=60)
+                return "B";
+            else if (input.marks>=40)
+                return "C";
+            else
+                return "D";
+        };
+        Predicate<Student> checkMarks = input -> input.marks>=60;
+        Consumer<Student> showGrade = input -> {
+            System.out.println("Name : " + input.name +", Marks : " + input.marks + ", Grade : "+calcGrade.apply(input));
+        };
+
+        ArrayList<Student> list = new ArrayList<>();
+        fillStudentArray(list);
+
+        for (Student s : list){
+            if (checkMarks.test(s)) {
+                showGrade.accept(s);
+            }
+        }
+
+    }
+
+    private static void fillStudentArray(ArrayList<Student> list) {
+        list.add(new Student("Gourav",100));
+        list.add(new Student("Sourav",50));
+        list.add(new Student("Varun",80));
+        list.add(new Student("Karan",40));
+
+    }
+}
