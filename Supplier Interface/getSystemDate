@@ -1,0 +1,15 @@
+import java.util.Date;
+import java.util.function.Supplier;
+
+/*
+        - Supplier Interface Contains only one SAM i.e. get()
+        - No Default or Static Methods are present inside supplier.
+        - Supplier takes only Return type as parameter and return the same type as output. 
+ */
+
+class TestClass{
+    public static void main(String[] args) {
+        Supplier<Date> supplier = () -> new Date();
+        System.out.println(supplier.get());
+    }
+}
